@@ -38,5 +38,12 @@ public abstract class BaseEntity {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+    public BaseEntity() {
+    }
+
+    public BaseEntity(String id) {
+        this.id = id;
+    }
 }
 

@@ -22,7 +22,7 @@ public class BookEntity extends BaseEntity {
     private String code;
 
     @DBRef
-    private BookCategory category;
+    private BookCategoryEntity category;
 
     @Field(name = "language")
     private String language;
