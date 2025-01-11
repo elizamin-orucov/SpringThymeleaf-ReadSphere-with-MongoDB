@@ -1,6 +1,8 @@
 package com.read.sphere.controllers;
 
+import com.read.sphere.dtos.list.BookCategoryListDto;
 import com.read.sphere.models.BookEntity;
+import com.read.sphere.services.BookCategoryService;
 import com.read.sphere.services.BookService;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -8,13 +10,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/books")
 public class BookController {
     private BookService service;
+    private BookCategoryService bookCategoryService;
 
-    public BookController(BookService service) {
+    public BookController(
+            BookService service,
+            BookCategoryService bookCategoryService
+    ) {
         this.service = service;
+        this.bookCategoryService = bookCategoryService;
     }
 
     @GetMapping
@@ -34,7 +43,14 @@ public class BookController {
 
         BookEntity bookEntity = new BookEntity();
 
+        List<BookCategoryListDto> bookCategoryListDto = bookCategoryService.list();
+
+        System.out.println("---------list--category");
+        System.out.println(bookCategoryListDto);
+        System.out.println("---------list--category");
+
         theModel.addAttribute("bookEntity", bookEntity);
+        theModel.addAttribute("categories", bookCategoryListDto);
 
         return "books/book-create-form.html";
     }
