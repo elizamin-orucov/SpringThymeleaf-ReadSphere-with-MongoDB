@@ -57,10 +57,16 @@ public class BookCategoryServiceImpl implements BookCategoryService {
     }
 
     public static <T extends BookCategoryListDto> BookCategoryEntity toBookCategoryEntity(T dto){
+        if (dto == null){
+            return null;
+        }
         return new BookCategoryEntity(dto.getId(), dto.getCategoryName());
     }
 
     public static <T extends BookCategoryEntity> BookCategoryListDto toBookCategoryListDto(T entity){
+        if (entity == null){
+            return null;
+        }
         return new BookCategoryListDto(entity.getId(), entity.getCategoryName());
     }
 }

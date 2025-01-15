@@ -14,8 +14,14 @@ import java.time.LocalDate;
 @Setter
 @Document(collection = "book")
 public class BookEntity extends BaseEntity {
+    @Field(name = "book_name")
+    private String bookName;
+
     @Field(name = "author_name")
     private String authorName;
+
+    @Field(name = "description")
+    private String description;
 
     @Field(name = "book_code")
     @Indexed(unique = true)
@@ -24,11 +30,17 @@ public class BookEntity extends BaseEntity {
     @DBRef
     private BookCategoryEntity category;
 
+    @DBRef
+    private PublisherEntity publisher;
+
     @Field(name = "language")
     private String language;
 
     @Field(name = "published_date")
     private LocalDate publishedDate;
+
+    @Field(name = "release_year")
+    private Integer releaseYear;
 
     @Field(name = "pages")
     private Integer pages;

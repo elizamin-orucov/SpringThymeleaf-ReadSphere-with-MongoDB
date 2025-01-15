@@ -1,10 +1,15 @@
 package com.read.sphere.controllers;
 
 import com.read.sphere.dtos.list.BookCategoryListDto;
+import com.read.sphere.dtos.list.BookListDto;
 import com.read.sphere.models.BookEntity;
 import com.read.sphere.services.BookCategoryService;
 import com.read.sphere.services.BookService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +23,15 @@ public class BookController {
     private BookService service;
     private BookCategoryService bookCategoryService;
 
+//    @GetMapping("/image/{id}")
+//    @ResponseBody
+//    public ResponseEntity<byte[]> getBookImage(@PathVariable String id) {
+//        byte[] imageBytes = service.getBookImageById(id);
+//        return ResponseEntity.ok()
+//                .contentType(MediaType.IMAGE_JPEG)
+//                .body(imageBytes);
+//    }
+
     public BookController(
             BookService service,
             BookCategoryService bookCategoryService
@@ -28,10 +42,12 @@ public class BookController {
 
     @GetMapping
     public String list(
+            Model theModel,
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size
     ){
-        Page<BookEntity> books = service.getAllBooks(page, size);
+        Pageable pageable = PageRequest.of(page, size);
+        Page<BookListDto> books = service.list(pageable);
         System.out.println("----------------------------");
         System.out.println(books);
         System.out.println("----------------------------");

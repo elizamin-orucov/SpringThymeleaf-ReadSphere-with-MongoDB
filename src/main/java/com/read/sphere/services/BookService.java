@@ -1,13 +1,8 @@
 package com.read.sphere.services;
 
-import com.read.sphere.models.BookEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.read.sphere.dtos.create.BookCreateDto;
+import com.read.sphere.dtos.list.BookListDto;
+import com.read.sphere.dtos.update.BookUpdateDto;
 
-public interface BookService {
-    Page<BookEntity> getAllBooks(int page, int size);
-
-    BookEntity findById(String id);
-
-
+public interface BookService extends BaseCRUDService<BookListDto, BookCreateDto, BookUpdateDto>{
 }
