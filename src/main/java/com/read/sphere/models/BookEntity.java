@@ -50,5 +50,31 @@ public class BookEntity extends BaseEntity {
 
     @Field(name = "pdf_id")
     private String pdfId;
+
+    // constructors
+    public BookEntity() {
+    }
+
+    public BookEntity(
+            String id,
+            String bookName,
+            String authorName,
+            String description,
+            String language,
+            LocalDate publishedDate,
+            Integer releaseYear,
+            Integer pages
+    ) {
+        super(id);
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.description = description;
+        this.language = language;
+        this.publishedDate = publishedDate;
+        this.releaseYear = releaseYear;
+        this.pages = pages;
+        this.imageId = imageId;
+        this.pdfId = pdfId;
+    }
 }
 

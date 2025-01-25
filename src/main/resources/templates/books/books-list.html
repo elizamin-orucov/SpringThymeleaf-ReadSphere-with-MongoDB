@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!-- Mirrored from bookland.dexignzone.com/xhtml/books-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 29 Dec 2024 21:31:34 GMT -->
 <head>
@@ -565,7 +565,8 @@
 				</div>
 				
 				<div class="row">
-					<div class="col-md-12 col-sm-12">
+<!--					for baslangic-->
+					<div class="col-md-12 col-sm-12" th:each="book : ${booksList}">
 						<div class="dz-shop-card style-2">
 							<div class="dz-media">
 								<img src="images/books/grid/book12.jpg" alt="book">									
@@ -574,18 +575,17 @@
 								<div class="dz-header">
 									<div>
 										<ul class="dz-tags">
-											<li><a href="books-list.html">ADVANTURE,</a></li>
-											<li><a href="books-list.html">SCIENCE,</a></li>
-											<li><a href="books-list.html">COMEDY</a></li>
+											<li th:text="${book.categoryName}}">
+											</li>
 										</ul>
-										<h4 class="title mb-0"><a href="books-list.html">The Missadventure of David</a></h4>
+										<h4 class="title mb-0"><a href="books-list.html" th:text="${book.bookName}"></a></h4>
 									</div>
 								</div>
 								
 								<div class="dz-body">
 									<div class="dz-rating-box">
 										<div>
-											<p class="dz-para">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting.</p>
+											<p class="dz-para" th:text="${book.description}"></p>
 										</div>
 										<div class="review-num">
 											<h4>4.0</h4>
@@ -601,9 +601,9 @@
 									</div>
 									<div class="rate">
 										<ul class="book-info">
-											<li><span>Writen by</span>Kevin Smiley</li>
-											<li><span>Publisher</span>Printarea Studios</li>
-											<li><span>Year</span>2019</li>
+											<li th:text="${book.authorName}"><span>Writen by</span></li>
+											<li th:text="${book.publisherName}"><span>Publisher</span>---Pr---</li>
+											<li th:text="${book.releaseYear}"><span>Year</span></li>
 										</ul>
 										<div class="d-flex">
 											<a href="shop-cart.html" class="btn btn-secondary btnhover btnhover2"> Read more</a>
@@ -619,6 +619,7 @@
 							</div>
 						</div>
 					</div>
+<!--					for bitis-->
 					
 				</div>
 				<div class="row page mt-0">

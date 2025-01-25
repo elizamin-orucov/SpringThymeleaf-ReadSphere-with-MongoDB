@@ -177,7 +177,7 @@
             <p class="mt-2 mb-0">Enter book details below</p>
         </div>
 
-        <form action="#" th:action="@{/books/save}" th:object="${bookEntity}" method="POST" enctype="multipart/form-data">
+        <form action="#" th:action="@{/books/save}" th:object="${bookDto}" method="POST" enctype="multipart/form-data">
             <div class="form-content">
                 <div class="form-grid">
                     <div class="form-group">
@@ -187,14 +187,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Book Code</label>
-                        <input type="text" class="form-control" th:field="*{code}" required
-                               placeholder="Enter unique book code">
+                        <label class="form-label">Release Year</label>
+                        <input type="text" class="form-control" th:field="*{releaseYear}" required
+                               placeholder="Enter release year">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Category</label>
-                        <select class="form-select form-control" th:field="*{category}">
+                        <select class="form-select form-control" th:field="*{categoryId}">
                             <option value="">Select a category</option>
                             <option th:each="cat : ${categories}" 
                                     th:value="${cat.id}" 
@@ -219,6 +219,12 @@
                         <input type="number" class="form-control" th:field="*{pages}" required
                                placeholder="Enter number of pages">
                     </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" th:field="*{description}" required
+                               placeholder="Enter description">
+                        </textarea>
                 </div>
 
                 <div class="upload-section">

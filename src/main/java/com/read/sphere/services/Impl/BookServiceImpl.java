@@ -7,6 +7,7 @@ import com.read.sphere.models.BookEntity;
 import com.read.sphere.repositories.BookRepository;
 import com.read.sphere.services.BookService;
 import com.read.sphere.services.MediaService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,9 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository repository;
     private final MediaService mediaService;
+
+    @Value("${baseFolder}")
+    private String baseFolder;
 
     public BookServiceImpl(
             BookRepository repository,
@@ -44,23 +48,32 @@ public class BookServiceImpl implements BookService {
     @Override
     public String create(BookCreateDto bookCreateDto) {
         BookEntity entity = toBookEntity(bookCreateDto);
+
+        System.out.println("\n\nentity test");
+        System.out.println(entity);
+        System.out.println("---------------");
+        System.out.println(entity instanceof BookEntity);
+        System.out.println("\ntest\n\n");
+
         repository.save(entity);
         return "new book successfully created";
     }
 
     public String create(BookCreateDto bookCreateDto, MultipartFile image, MultipartFile pdf){
+        System.out.println("service deki impl create method");
+        System.out.println(baseFolder);
         BookEntity newBookEntity = toBookEntity(bookCreateDto);
 
         BookEntity savedBookEntity = repository.save(newBookEntity);
 
-        String saveFolder = "books/images/" + savedBookEntity + "/";
+        String saveFolder = baseFolder + "books/images/" + savedBookEntity.getId() + "/";
 
         String imagePath = mediaService.saveFile(saveFolder, image);
         String pdfPath = mediaService.saveFile(saveFolder.replace("images", "pdfs"), pdf);
 
-        System.out.println(imagePath);
-        System.out.println("----------------------");
-        System.out.println(pdfPath);
+        savedBookEntity.setImageId(imagePath);
+        savedBookEntity.setPdfId(pdfPath);
+        repository.save(savedBookEntity);
 
         return "new message";
 
@@ -88,7 +101,16 @@ public class BookServiceImpl implements BookService {
     }
 
     public static <T extends BookCreateDto> BookEntity toBookEntity(T dto){
-        return new BookEntity();
+
+        return new BookEntity(dto.getId(),
+                dto.getBookName(),
+                dto.getAuthorName(),
+                dto.getDescription(),
+                dto.getLanguage(),
+                dto.getPublishedDate(),
+                dto.getReleaseYear(),
+                dto.getPages()
+                );
     }
 
     public static BookCreateDto toBookDto(BookEntity bookEntity){
