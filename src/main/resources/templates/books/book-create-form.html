@@ -204,6 +204,17 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="form-label">Publisher</label>
+                        <select class="form-select form-control" th:field="*{publisher}">
+                            <option value="">Select a category</option>
+                            <option th:each="publisher : ${publishers}"
+                                    th:value="${publisher.id}"
+                                    th:text="${publisher.publisherName}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label class="form-label">Language</label>
                         <input type="text" class="form-control" th:field="*{language}" required
                                placeholder="Enter book language">

@@ -6,5 +6,6 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PublisherCreateDto extends PublisherListDto {
+public class PublisherCreateDto {
+    private String publisherName;
 }

@@ -3,6 +3,7 @@ package com.read.sphere.services.Impl;
 import com.read.sphere.dtos.create.BookCategoryCreateDto;
 import com.read.sphere.dtos.list.BookCategoryListDto;
 import com.read.sphere.dtos.update.BookCategoryUpdateDto;
+import com.read.sphere.exception.EntityNotFoundException;
 import com.read.sphere.models.BookCategoryEntity;
 import com.read.sphere.repositories.BookCategoryRepository;
 import com.read.sphere.services.BookCategoryService;
@@ -36,6 +37,11 @@ public class BookCategoryServiceImpl implements BookCategoryService {
         BookCategoryEntity bookCategoryEntity = toBookCategoryEntity(bookCategoryCreateDto);
         repository.save(bookCategoryEntity);
         return "new category added successfully";
+    }
+
+    @Override
+    public BookCategoryEntity getById(String id) {
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("BookCategory not found with ID: " + id));
     }
 
     @Override

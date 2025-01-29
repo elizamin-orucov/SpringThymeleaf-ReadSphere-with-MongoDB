@@ -16,6 +16,10 @@ public class PublisherEntity extends BaseDto {
     public PublisherEntity() {
     }
 
+    public PublisherEntity(String publisherName) {
+        this.publisherName = publisherName;
+    }
+
     public PublisherEntity(String publisherName, String imageId) {
         super();
         this.publisherName = publisherName;

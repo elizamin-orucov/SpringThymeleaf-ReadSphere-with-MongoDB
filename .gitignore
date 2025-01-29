@@ -41,5 +41,7 @@ mediafiles/
 
 ### Log folders
 logs/
+media-service.log
+media-service.log.2025-01-24.0.gz
 
 

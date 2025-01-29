@@ -1,11 +1,14 @@
 package com.read.sphere.controllers;
 
 import com.read.sphere.dtos.create.BookCreateDto;
+import com.read.sphere.dtos.detail.BookDetailDto;
 import com.read.sphere.dtos.list.BookCategoryListDto;
 import com.read.sphere.dtos.list.BookListDto;
+import com.read.sphere.dtos.list.PublisherListDto;
 import com.read.sphere.models.BookEntity;
 import com.read.sphere.services.BookCategoryService;
 import com.read.sphere.services.BookService;
+import com.read.sphere.services.PublisherService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,12 +26,15 @@ import java.util.List;
 public class BookController {
     private BookService service;
     private BookCategoryService bookCategoryService;
+    private PublisherService publisherService;
 
     public BookController(
             BookService service,
+            PublisherService publisherService,
             BookCategoryService bookCategoryService
     ) {
         this.service = service;
+        this.publisherService = publisherService;
         this.bookCategoryService = bookCategoryService;
     }
 
@@ -38,22 +44,29 @@ public class BookController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int size
     ){
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page - 1, size);
         Page<BookListDto> books = service.list(pageable);
-
-
-        if (books.hasContent()) {
-            // Veriler mevcutsa içeriği yazdır
-            System.out.println("Toplam kitap sayısı: " + books.getTotalElements());
-            System.out.println("Toplam sayfa sayısı: " + books.getTotalPages());
-            books.getContent().forEach(book -> System.out.println(book));
-        } else {
-            // Veri gelmediyse
-            System.out.println("Veri bulunamadı.");
-        }
 
         theModel.addAttribute("booksList", books);
         return "books/books-list.html";
+    }
+
+    @GetMapping("/detail/{id}")
+    public String detailBook(
+            Model theModel,
+            @PathVariable String id
+    ){
+
+        System.out.println("detaile giris");
+        BookDetailDto detailDto = service.findById(id);
+
+        System.out.println("-----------------------------ygyggggyg--------------");
+        System.out.println(detailDto);
+        System.out.println("-----------------------------ygyggggyg--------------");
+
+        theModel.addAttribute("detailDto", detailDto);
+
+        return "books/books-detail.html";
     }
 
     @GetMapping("/form")
@@ -63,8 +76,11 @@ public class BookController {
 
         List<BookCategoryListDto> bookCategoryListDto = bookCategoryService.list();
 
+        List<PublisherListDto> publisherListDto = publisherService.list();
+
         theModel.addAttribute("bookDto", bookDto);
         theModel.addAttribute("categories", bookCategoryListDto);
+        theModel.addAttribute("publishers", publisherListDto);
 
         return "books/book-create-form.html";
     }
@@ -75,16 +91,17 @@ public class BookController {
             @RequestParam("image") MultipartFile imageFile,
             @RequestParam("pdf") MultipartFile pdfFile
     ){
-
-        System.out.println("SAVE");
-        System.out.println(bookCreateDto);
-        System.out.println("files");
-        System.out.println(imageFile);
-        System.out.println("pdf");
-        System.out.println(pdfFile);
-        System.out.println("SAVE");
-
         service.create(bookCreateDto, imageFile, pdfFile);
+        return "redirect:/books";
+    }
+
+    @PostMapping("/delete")
+    public String bookDelete(
+            @RequestParam("id") String bookId
+    ){
+        System.out.println("delete gelen sorgu:   ------  ");
+        System.out.println("silinen id " + bookId);
+        service.delete(bookId);
         return "redirect:/books";
     }
 }

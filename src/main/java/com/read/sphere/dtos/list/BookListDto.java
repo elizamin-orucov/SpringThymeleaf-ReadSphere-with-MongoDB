@@ -22,4 +22,26 @@ public class BookListDto extends BaseDto {
 
     private String imageId;
 
+    public BookListDto() {
+    }
+
+    public BookListDto(
+            String id,
+            String bookName,
+            String authorName,
+            String description,
+            String categoryName,
+            String publisherName,
+            Integer releaseYear,
+            String imageId
+    ) {
+        super(id);
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.description = description;
+        this.categoryName = categoryName;
+        this.publisherName = publisherName;
+        this.releaseYear = releaseYear;
+        this.imageId = imageId;
+    }
 }

@@ -109,7 +109,7 @@ public class MediaServiceImpl implements MediaService {
             }
             return deleted;
 
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             log.error("Error deleting file: {}", filePath, e);
             return false;
         }
