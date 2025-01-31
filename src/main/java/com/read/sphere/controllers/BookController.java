@@ -57,16 +57,16 @@ public class BookController {
             @PathVariable String id
     ){
 
-        System.out.println("detaile giris");
-        BookDetailDto detailDto = service.findById(id);
+//        System.out.println("detaile giris");
+//        BookDetailDto detailDto = service.findById(id);
+//
+//        System.out.println("-----------------------------ygyggggyg--------------");
+//        System.out.println(detailDto);
+//        System.out.println("-----------------------------ygyggggyg--------------");
+//
+//        theModel.addAttribute("detailDto", detailDto);
 
-        System.out.println("-----------------------------ygyggggyg--------------");
-        System.out.println(detailDto);
-        System.out.println("-----------------------------ygyggggyg--------------");
-
-        theModel.addAttribute("detailDto", detailDto);
-
-        return "books/books-detail.html";
+        return "books/post-side.html";
     }
 
     @GetMapping("/form")
