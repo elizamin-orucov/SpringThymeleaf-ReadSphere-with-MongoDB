@@ -73,8 +73,6 @@ public class BookEntity extends BaseEntity {
         this.publishedDate = publishedDate;
         this.releaseYear = releaseYear;
         this.pages = pages;
-        this.imageId = imageId;
-        this.pdfId = pdfId;
     }
 }
 

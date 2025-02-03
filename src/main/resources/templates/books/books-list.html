@@ -247,7 +247,7 @@
 								<div class="dz-header">
 									<div>
 										<ul class="dz-tags">
-											<li th:text="${book.categoryName}">
+											<li th:text="${book.categoryName}" style="color:orange;">
 											</li>
 										</ul>
 										<h4 class="title mb-0"><a href="books-list.html" th:text="${book.bookName}"></a></h4>
@@ -257,7 +257,8 @@
 								<div class="dz-body">
 									<div class="dz-rating-box">
 										<div>
-											<p class="dz-para" th:text="${book.description}"></p>
+<!--											<p class="dz-para" th:text="${book.description}"></p>-->
+											<p class="dz-para" th:text="${#strings.length(book.description) > 100 ? #strings.substring(book.description, 0, 100) + '...' : book.description}"></p>
 										</div>
 										<div class="review-num">
 											<h4>4.0</h4>

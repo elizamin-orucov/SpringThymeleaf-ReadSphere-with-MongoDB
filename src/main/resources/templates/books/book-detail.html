@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<!-- Mirrored from bookland.dexignzone.com/xhtml/post-side.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 29 Dec 2024 21:31:53 GMT -->
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +14,7 @@
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
 	
 	<!-- PAGE TITLE HERE -->
 	<title>Bookland-Book Store Ecommerce Website</title>
@@ -24,9 +23,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<!-- STYLESHEETS -->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="icons/fontawesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="/icons/fontawesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
 	
 	
 	<!-- GOOGLE FONTS-->
@@ -57,7 +56,7 @@
 				<div class="row">
 					<div class="col-12 col-lg-6">
 						<div class="side-media m-b30">
-							<img src="images/post-layout/pic1.jpg" alt="">
+							<img th:src="@{'/media/image/' + ${detailDto.id}}" alt="book">
 						</div>
 					</div>
 
@@ -68,18 +67,18 @@
 							<div class="dz-info">
 								<div class="dz-meta border-0 py-0 mb-2">
 									<ul class="border-0 pt-0">
-										<li class="post-date"><i class="far fa-calendar fa-fw m-r10"></i>7 March, 2024</li>
-										<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);"> Johne Doe</a></li>
+										<li class="post-date" th:text="${detailDto.publisherName}"><i class="far fa-calendar fa-fw m-r10"></i></li>
+										<li class="post-author"><i class="far fa-user fa-fw m-r10"></i>By <a href="javascript:void(0);" th:text="${detailDto.authorName}"></a></li>
 									</ul>
 								</div>
-								<h4 class="dz-title">The Time Is Running Out! Think About These 6 Ways To Change Your Library. How To Restore Library?</h4>
+								<h4 class="dz-title" th:text="${detailDto.bookName}"></h4>
 								<div class="dz-post-text">
 									<p>Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor vitae, porttitor quis erat. Donec sit amet semper massa.</p>
 									<p>Ut non nisl et magna molestie tincidunt. Aliquam erat volutpat. Vivamus eget feugiat odio. Vivamus faucibus lorem nec mollis placerat. Nulla et dapibus est. Fusce porttitor arcu ac velit commodo hendrerit. Vestibulum tempor dapibus sapien. Maecenas accumsan rhoncus massa, nec ornare libero faucibus tincidunt. Cras metus tortor, pretium vitae scelerisque id, sollicitudin at est.</p>
 									<blockquote class="wp-block-quote is-style-default"><p>A great book should leave you with many experiences, and slightly exhausted at the end. You live several lives while reading. </p><cite>Library Community</cite></blockquote>
 									<p>Fusce sem ligula, imperdiet sed nisi sit amet, euismod posuere dolor. Vestibulum in ante ut tortor eleifend venenatis. Morbi ac hendrerit nisl. Sed auctor magna lacus, in placerat nisl sollicitudin ut. Morbi feugiat ante velit, eget convallis arcu iaculis vel. Fusce in rhoncus quam. Integer dolor arcu, ullamcorper sed auctor vitae, porttitor quis erat. </p>
 									<h4 class="m-b30">Understanding The Background Of Library.</h4>
-									<img class="alignleft rounded-md w-50" src="images/blog/blog.jpg" alt="">
+									<img class="alignleft rounded-md w-50" src="/images/blog/blog.jpg" alt="">
 									<p>Pellentesque quis molestie lacus. Sed et pellentesque nibh. Pellentesque pretium pretium neque, vel fermentum nisl ornare non. Aliquam interdum rutrum magna quis.</p>
 									<p>Donec pretium, quam a aliquet pretium, dolor magna malesuada libero, non rhoncus quam lectus at lectus. Mauris id consequat est, ut aliquet lorem. Maecenas mi sem, aliquam et semper et, sagittis non magna. Vivamus et maximus nulla. Morbi tincidunt ex ac diam imperdiet, ut pretium justo porttitor. Class aptent taciti sociosqu ad litora</p>
 									<p>Donec suscipit porta lorem eget condimentum. Morbi vitae mauris in leo venenatis varius. Aliquam nunc enim, egestas ac dui in, aliquam vulputate erat. Curabitur porttitor ante ut odio vestibulum, et iaculis arcu scelerisque. Sed ornare mi vitae elit molestie malesuada. Curabitur venenatis venenatis elementum.</p>
@@ -109,7 +108,7 @@
 							<div class="col-lg-6 col-md-6">
 								<div class="dz-blog style-1 bg-white m-b30">
 									<div class="dz-media">
-										<a href="blog-detail.html"><img src="images/blog/default/blog1.jpg" alt=""></a>
+										<a href="blog-detail.html"><img src="/images/blog/default/blog1.jpg" alt=""></a>
 									</div>
 									<div class="dz-info">
 										<h5 class="dz-title">
@@ -128,7 +127,7 @@
 							<div class="col-lg-6 col-md-6">
 								<div class="dz-blog style-1 bg-white m-b30">
 									<div class="dz-media">
-										<a href="blog-detail.html"><img src="images/blog/large/blog4.jpg" alt=""></a>
+										<a href="blog-detail.html"><img src="/images/blog/large/blog4.jpg" alt=""></a>
 									</div>
 									<div class="dz-info">
 										<h5 class="dz-title">
@@ -153,7 +152,7 @@
 										<li class="comment even thread-even depth-1 comment" id="comment-2">
 											<div class="comment-body">
 											  <div class="comment-author vcard">
-													<img src="images/profile4.jpg" alt="" class="avatar"/>
+													<img src="/images/profile4.jpg" alt="" class="avatar"/>
 													<cite class="fn">Michel Poe</cite> <span class="says">says:</span>
 													<div class="comment-meta">
 														<a href="javascript:void(0);">December 22, 2024 at 6:14 am</a>
@@ -170,7 +169,7 @@
 										  <li class="comment byuser comment-author-w3itexpertsuser bypostauthor odd alt depth-2 comment" id="comment-3">
 											 <div class="comment-body" id="div-comment-3">
 												<div class="comment-author vcard">
-												   <img src="images/profile3.jpg" alt="" class="avatar"/>
+												   <img src="/images/profile3.jpg" alt="" class="avatar"/>
 												   <cite class="fn">Celesto Anderson</cite> <span class="says">says:</span>
 												   <div class="comment-meta">
 													  <a href="javascript:void(0);">December 22, 2024 at 6:14 am</a>
@@ -189,7 +188,7 @@
 									<li class="comment even thread-odd thread-alt depth-1 comment" id="comment-4">
 									   <div class="comment-body" id="div-comment-4">
 										  <div class="comment-author vcard">
-											 <img src="images/profile2.jpg" alt="" class="avatar"/>
+											 <img src="/images/profile2.jpg" alt="" class="avatar"/>
 											 <cite class="fn">Ryan</cite> <span class="says">says:</span>
 											 <div class="comment-meta">
 												<a href="javascript:void(0);">December 22, 2024 at 6:14 am</a>
@@ -206,7 +205,7 @@
 									<li class="comment odd alt thread-even depth-1 comment" id="comment-5">
 									   <div class="comment-body" id="div-comment-5">
 										  <div class="comment-author vcard">
-											 <img src="images/profile1.jpg" alt="" class="avatar"/>
+											 <img src="/images/profile1.jpg" alt="" class="avatar"/>
 											 <cite class="fn">Stuart</cite> <span class="says">says:</span>
 											 <div class="comment-meta">
 												<a href="javascript:void(0);">December 22, 2024 at 6:14 am</a>
@@ -260,5 +259,5 @@
 
 </body>
 
-<!-- Mirrored from bookland.dexignzone.com/xhtml/post-side.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 29 Dec 2024 21:31:53 GMT -->
+<!-- Mirrored from bookland.dexignzone.com/xhtml/book-detail.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 29 Dec 2024 21:31:53 GMT -->
 </html>
