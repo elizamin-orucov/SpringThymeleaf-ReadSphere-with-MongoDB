@@ -5,15 +5,17 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface BaseCRUDService<ListDto, CreateDto, UpdateDto> {
+public interface BaseCRUDService<
+        EntityListDto, EntityCreateDto, EntityUpdateDto
+        > {
 
-    Page<ListDto> list(Pageable pageable);
+    Page<EntityListDto> list(Pageable pageable);
 
-    List<ListDto> list();
+    List<EntityListDto> list();
 
-    String create(CreateDto dto);
+    String create(EntityCreateDto dto);
 
-    String update(UpdateDto dto);
+    String update(EntityUpdateDto dto);
 
     String delete(String id);
 

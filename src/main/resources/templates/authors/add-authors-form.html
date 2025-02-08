@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Publisher</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --accent-color: #FFA726;
+            --bg-light: #f8f9fa;
+        }
+
+        body {
+            background: #f5f7fa;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+        }
+
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .form-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+        }
+
+        .form-content {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 1rem;
+        }
+
+        .upload-container {
+            background: var(--bg-light);
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-container:hover {
+            border-color: var(--accent-color);
+            background: #FFE0B2;
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .file-name {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            color: #333;
+            display: none;
+        }
+
+        .btn-submit {
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-submit:hover {
+            background: #FB8C00;
+        }
+
+    </style>
+</head>
+<body>
+<div class="main-container">
+    <div class="form-header">
+        <h1>🖋 Add New Publisher</h1>
+    </div>
+
+    <form action="#" th:action="@{/authors/save}" th:object="${authorDto}" method="POST" enctype="multipart/form-data">
+        <div class="form-content">
+            <!-- Author Name -->
+            <div class="form-group">
+                <label class="form-label" for="authorName">Author Name</label>
+                <input type="text" id="authorName" class="form-control" th:field="*{name}" placeholder="Enter author name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="authorSurname">Author Surname</label>
+                <input type="text" id="authorSurname" class="form-control" th:field="*{surname}" placeholder="Enter author surname" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">About</label>
+                <textarea class="form-control" th:field="*{about}" required
+                          placeholder="Enter author about">
+                        </textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group">
+                <label class="form-label">Upload Image</label>
+                <div class="upload-container" id="imageUpload">
+                    <input type="file" name="image" accept="image/*" id="image" style="display: none;" required>
+                    <div class="upload-icon">📷</div>
+                    <div class="upload-text">Click to upload author image</div>
+                    <span id="imageFileName" class="file-name"></span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">Add Publisher</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    const imageUploadContainer = document.getElementById('imageUpload');
+    const imageInput = document.getElementById('image');
+    const imageFileName = document.getElementById('imageFileName');
+
+    imageUploadContainer.addEventListener('click', () => {
+        imageInput.click();
+    });
+
+    imageInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            const file = e.target.files[0];
+            imageFileName.textContent = file.name;
+            imageFileName.style.display = 'block';
+        }
+    });
+</script>
+
+</body>
+</html>

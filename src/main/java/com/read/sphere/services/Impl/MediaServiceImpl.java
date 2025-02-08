@@ -1,6 +1,8 @@
 package com.read.sphere.services.Impl;
 
+import com.read.sphere.models.AuthorEntity;
 import com.read.sphere.models.BookEntity;
+import com.read.sphere.repositories.AuthorRepository;
 import com.read.sphere.repositories.BookRepository;
 import com.read.sphere.services.MediaService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,10 +32,13 @@ public class MediaServiceImpl implements MediaService {
 
     private final BookRepository bookRepository;
 
+    private final AuthorRepository authorRepository;
+
     private final String uploadDir = baseFolder + LocalDate.now() + "/";
 
-    public MediaServiceImpl(BookRepository bookRepository) {
+    public MediaServiceImpl(BookRepository bookRepository, AuthorRepository authorRepository) {
         this.bookRepository = bookRepository;
+        this.authorRepository = authorRepository;
     }
 
     @Override
@@ -56,7 +60,7 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public byte[] getFile(String id, String fileType) {
+    public byte[] getBookFile(String id, String fileType) {
         Optional<BookEntity> optionalEntity = bookRepository.findById(id);
 
         if (optionalEntity.isPresent()) {
@@ -74,6 +78,21 @@ public class MediaServiceImpl implements MediaService {
         log.warn("No file found for book ID: {} and type: {}", id, fileType);
         return new byte[0];
     }
+
+    @Override
+    public byte[] getAuthorPhoto(String id) {
+        Optional<AuthorEntity> optionalAuthor = authorRepository.findById(id);
+
+        if (optionalAuthor.isPresent()){
+            AuthorEntity authorEntity = optionalAuthor.get();
+            log.info("Retrieving image for author name: {}", authorEntity.getName());
+            return readFile(authorEntity.getImageId());
+        }
+        log.warn("No file found for author photo");
+        return new byte[0];
+    }
+
+
 
     @Override
     public String saveFile(String folderNameForeSave, MultipartFile file) {

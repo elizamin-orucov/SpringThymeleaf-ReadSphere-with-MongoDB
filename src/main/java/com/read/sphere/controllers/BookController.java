@@ -5,15 +5,12 @@ import com.read.sphere.dtos.detail.BookDetailDto;
 import com.read.sphere.dtos.list.BookCategoryListDto;
 import com.read.sphere.dtos.list.BookListDto;
 import com.read.sphere.dtos.list.PublisherListDto;
-import com.read.sphere.models.BookEntity;
 import com.read.sphere.services.BookCategoryService;
 import com.read.sphere.services.BookService;
 import com.read.sphere.services.PublisherService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,9 +21,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/books")
 public class BookController {
-    private BookService service;
-    private BookCategoryService bookCategoryService;
-    private PublisherService publisherService;
+    private final BookService service;
+    private final BookCategoryService bookCategoryService;
+    private final PublisherService publisherService;
 
     public BookController(
             BookService service,

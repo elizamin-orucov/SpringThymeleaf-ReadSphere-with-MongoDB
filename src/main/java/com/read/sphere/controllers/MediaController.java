@@ -17,9 +17,18 @@ public class MediaController {
     @GetMapping("/image/{id}")
     @ResponseBody
     public ResponseEntity<byte[]> getBookImage(@PathVariable String id) {
-        byte[] imageBytes = mediaService.getFile(id, "img");
+        byte[] imageBytes = mediaService.getBookFile(id, "img");
         return ResponseEntity.ok()
                 .contentType(MediaType.IMAGE_JPEG)
                 .body(imageBytes);
+    }
+
+    @GetMapping("/author/profile/image/{id}")
+    @ResponseBody
+    public ResponseEntity<byte[]> getAuthorProfilePhoto(@PathVariable String id){
+        byte[] imageByte = mediaService.getAuthorPhoto(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(imageByte);
     }
 }

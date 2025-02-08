@@ -82,7 +82,7 @@ public class BookServiceImpl implements BookService {
         savedBookEntity.setPdfId(pdfPath);
         repository.save(savedBookEntity);
 
-        return "new message";
+        return "new book successfully created";
 
     }
 
